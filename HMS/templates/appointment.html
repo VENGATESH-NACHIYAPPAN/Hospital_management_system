@@ -1,0 +1,70 @@
+{% extends 'dummy_base.html' %}
+{% block title %} Appointments {% endblock %}
+
+{% block content %}
+<div class="container py-5" style="min-height: 75vh;">
+
+    <div class="row mb-5 text-center">
+        <div class="col-lg-8 mx-auto">
+            <h2 class="fw-bold text-dark display-6">Scheduled Appointments</h2>
+            <p class="text-muted">Manage and view all upcoming patient consultations below.</p>
+            <hr class="w-25 mx-auto border-info border-2 opacity-75">
+        </div>
+    </div>
+
+    <div class="row g-4">
+
+        {% for a in appointment %}
+        <div class="col-12 col-md-6 col-lg-4">
+            <div class="card h-100 border-0 shadow-sm rounded-3 bg-white">
+
+                <div class="card-header bg-info bg-opacity-10 border-0 py-3 d-flex align-items-center justify-content-between">
+                    <span class="badge bg-success fw-bold">Confirmed</span>
+                    <small class="text-muted fw-bold">
+                        <i class="far fa-clock me-1 text-info"></i> {{ a.appointment_time }}
+                    </small>
+                </div>
+
+                <div class="card-body p-4">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="bg-light rounded-circle p-2 d-inline-flex align-items-center justify-content-center me-3" style="width: 45px; height: 45px;">
+                            <i class="fas fa-user text-secondary"></i>
+                        </div>
+                        <div>
+                            <p class="text-muted small mb-0">Patient Name</p>
+                            <h5 class="card-title fw-bold text-dark mb-0">{{  a.patient_name }}</h5>
+                        </div>
+                    </div>
+
+                    <div class="d-flex align-items-center">
+                        <div class="bg-light rounded-circle p-2 d-inline-flex align-items-center justify-content-center me-3" style="width: 45px; height: 45px;">
+                            <i class="fas fa-user-md text-info"></i>
+                        </div>
+                        <div>
+                            <p class="text-muted small mb-0">Assigned Doctor</p>
+                            <p class="fw-semibold text-secondary mb-0">Dr. {{ a.doctor_name }}</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-footer bg-light border-0 py-3 text-center">
+                    <span class="text-dark fw-bold small">
+                        <i class="far fa-calendar-alt me-1 text-info"></i> {{ appointment_date }}
+                    </span>
+                </div>
+
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-12 text-center py-5">
+            <div class="text-muted mb-3">
+                <i class="fas fa-calendar-times fa-3x opacity-25"></i>
+            </div>
+            <h4 class="fw-bold text-secondary">No Appointments Found</h4>
+            <p class="text-muted">There are currently no scheduled consultations listed in the system.</p>
+        </div>
+        {% endfor %}
+
+    </div>
+</div>
+{% endblock %}

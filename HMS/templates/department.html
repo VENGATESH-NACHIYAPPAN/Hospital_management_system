@@ -1,0 +1,57 @@
+{% extends 'dummy_base.html' %}
+
+{% block title %}
+Our Departments | MediCare
+{% endblock %}
+
+{% block content %}
+<!-- Custom background layout with overlay for text readability -->
+<div style="background: linear-gradient(rgba(244, 247, 246, 0.9), rgba(244, 247, 246, 0.9)), url('/static/images/back1.jpg'); min-height: 100vh;">
+    <div class="container py-5">
+        <div class="text-center mb-5">
+            <h1 class="display-5 fw-bold text-primary">Our Medical Departments</h1>
+            <p class="text-muted max-w-2xl mx-auto">Discover our specialized medical divisions committed to providing healthcare excellence with state-of-the-art facilities.</p>
+        </div>
+
+        <!-- Dynamic Grid Layout -->
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+            {% for p in dept_name %}
+            <div class="col">
+                <div class="card h-100 border-0 shadow-sm transition-hover">
+                    <div class="card-body p-4 text-center">
+                        <!-- Decorative Contextual Medical Icon Holder -->
+                        <div class="d-inline-flex align-items-center justify-content-center bg-primary bg-opacity-10 text-primary rounded-circle mb-4" style="width: 60px; height: 60px;">
+                            <i class="bi bi-heart-pulse fs-3"></i>
+                        </div>
+
+                        <h3 class="card-title fw-bold text-dark mb-3">{{ p.department_name }}</h3>
+                        <p class="card-text text-muted leading-relaxed">{{ p.department_description }}</p>
+                    </div>
+                    <div class="card-footer bg-transparent border-0 text-center pb-4">
+                        <a href="{% url 'doctor' %}?department={{ p.id }}" class="btn btn-sm btn-outline-primary px-3 rounded-pill">View Specialists</a>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <div class="col-12 text-center my-5">
+                <div class="alert alert-info py-4" role="alert">
+                    <i class="bi bi-info-circle-fill fs-3 d-block mb-2"></i>
+                    No medical departments have been added to the system yet.
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+
+<style>
+    .transition-hover {
+        transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    }
+    .transition-hover:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+    }
+</style>
+{% endblock %}

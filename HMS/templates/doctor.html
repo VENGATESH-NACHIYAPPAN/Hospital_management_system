@@ -1,0 +1,41 @@
+{% extends 'dummy_base.html' %}
+{% load static %}
+
+{% block title %}
+Our Doctors
+{% endblock %}
+
+{% block content %}
+{% static 'images/back1.jpg' as bg_image %}
+
+<div class="py-5 px-3 min-vh-100" style="background: linear-gradient(rgba(244, 247, 246, 0.95), rgba(244, 247, 246, 0.95))  center/cover no-repeat;">
+
+    <div class="container">
+        <h1 class="text-center fw-bold text-dark mb-5">Our Doctors</h1>
+
+        <div class="row g-4 justify-content-center">
+            {% for d in doc %}
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="card h-100 border-0 shadow-sm rounded-3 p-3 text-center bg-white">
+
+                    <div class="rounded-3 overflow-hidden bg-light d-flex align-items-center justify-content-center" style="height: 280px;">
+                        <img src="{{ d.doctor_image.url }}" class="w-100 h-100" style="object-fit: cover;" alt="Dr. {{ d.doctor_name }}">
+                    </div>
+
+                    <div class="card-body pt-3 px-1 pb-0">
+                        <h5 class="card-title fw-semibold text-dark text-break mb-1">{{ d.doctor_name }}</h5>
+                        <p class="card-text text-muted text-uppercase small tracking-wider fw-medium mb-0">{{ d.doctor_specialization }}</p>
+                    </div>
+
+                </div>
+            </div>
+            {% empty %}
+            <div class="col-12 text-center py-5">
+                <p class="text-muted fs-5">No doctors available at the moment.</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+</div>
+{% endblock %}

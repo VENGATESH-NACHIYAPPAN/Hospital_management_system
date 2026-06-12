@@ -1,0 +1,19 @@
+{% extends 'dummy_base.html' %}
+{% load crispy_forms_tags %}
+{% block title %} Patient {% endblock %}
+
+{% block content %}
+<div style="background: url('/static/images/back1.jpg') no-repeat center center / cover;" class="d-flex align-items-center justify-content-center py-5">
+
+  <div class=" my-4  d-flex flex-column align-items-center col-11 col-sm-8 col-md-6 col-lg-4 text-center bg-primary text-white rounded shadow p-4 my-5 mb-5">
+
+    <form action="" method="post" class="w-100">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <br>
+        <button class="btn btn-danger w-50 fw-bold py-2" type="submit">Submit</button>
+    </form>
+
+  </div>
+</div>
+{% endblock %}
